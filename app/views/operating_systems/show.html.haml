@@ -1,0 +1,12 @@
+.page-header
+  = link_to operating_systems_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_operating_system_path(@operating_system), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show operating_system
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @operating_system.name

@@ -1,0 +1,34 @@
+.page-header
+  = link_to new_startup_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Startup
+  %h1 Listing startups
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Order
+        %th Name
+        %th Executable ID
+        %th Location
+        %th Operating system
+        %th
+        %th
+        %th
+
+    %tbody
+      - @startups.each do |startup|
+        %tr
+          %td= startup.order
+          %td= startup.name
+          - executable = Executable.load_executable(startup.executable_id)
+          - if executable.respond_to?('raw')
+            %td= executable.command
+          - else
+            %td= link_to(executable.name, executable)
+          %td= startup.location&.path
+          %td= startup.operating_system&.name
+          %td= link_to 'Show', startup
+          %td= link_to 'Edit', edit_startup_path(startup)
+          %td= link_to 'Destroy', startup, data: { confirm: 'Are you sure?' }, method: :delete

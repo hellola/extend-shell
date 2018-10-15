@@ -1,0 +1,28 @@
+.page-header
+  = link_to new_function_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Function
+  %h1 Listing functions
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Body
+        %th Location
+        %th Operating system
+        %th
+        %th
+        %th
+
+    %tbody
+      - @functions.each do |function|
+        %tr
+          %td= function.name
+          %td= function.body
+          %td= function.location.name
+          %td= function.operating_system.name
+          %td= link_to 'Show', function
+          %td= link_to 'Edit', edit_function_path(function)
+          %td= link_to 'Destroy', function, data: { confirm: 'Are you sure?' }, method: :delete

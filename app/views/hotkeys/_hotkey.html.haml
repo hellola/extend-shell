@@ -1,0 +1,12 @@
+
+.row
+  .col-md-1
+    =hotkey.id
+  .col-md-3
+    =hotkey.name
+  .col-md-3.code
+    =hotkey.command
+  .col-md-3
+    =hotkey.hotkey_type&.name || 'none'
+  .col-md-3
+    =hotkey.parent&.name || 'none'

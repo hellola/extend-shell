@@ -1,0 +1,20 @@
+.page-header
+  = link_to startups_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_startup_path(@startup), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show startup
+
+%dl.dl-horizontal
+  %dt Order:
+  %dd= @startup.order
+  %dt Name:
+  %dd= @startup.name
+  %dt Command:
+  %dd= @startup.command
+  %dt Location:
+  %dd= @startup.location&.name
+  %dt Operating system:
+  %dd= @startup.operating_system&.name

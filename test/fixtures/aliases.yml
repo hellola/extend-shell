@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  command: MyString
+  location: one
+  operating_system: one
+
+two:
+  name: MyString
+  command: MyString
+  location: two
+  operating_system: two

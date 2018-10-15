@@ -1,0 +1,30 @@
+.page-header
+  = link_to new_alias_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Alias
+  %h1 Listing aliases
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th ID
+        %th Name
+        %th Command
+        %th Location
+        %th Operating system
+        %th
+        %th
+        %th
+
+    %tbody
+      - @aliases.each do |als|
+        %tr
+          %td= als.id
+          %td= als.name
+          %td= als.command
+          %td= als.location&.name || 'none'
+          %td= als.operating_system&.name || 'none'
+          %td= link_to 'Show', als
+          %td= link_to 'Edit', edit_alias_path(als)
+          %td= link_to 'Destroy', als, data: { confirm: 'Are you sure?' }, method: :delete

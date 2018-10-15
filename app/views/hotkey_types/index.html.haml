@@ -1,0 +1,22 @@
+.page-header
+  = link_to new_hotkey_type_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Hotkey type
+  %h1 Listing hotkey_types
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th
+        %th
+        %th
+
+    %tbody
+      - @hotkey_types.each do |hotkey_type|
+        %tr
+          %td= hotkey_type.name
+          %td= link_to 'Show', hotkey_type
+          %td= link_to 'Edit', edit_hotkey_type_path(hotkey_type)
+          %td= link_to 'Destroy', hotkey_type, data: { confirm: 'Are you sure?' }, method: :delete

@@ -1,0 +1,24 @@
+.page-header
+  = link_to new_history_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New History
+  %h1 Listing histories
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Command
+        %th Location
+        %th
+        %th
+        %th
+
+    %tbody
+      - @histories.each do |history|
+        %tr
+          %td= history.command
+          %td= history.location
+          %td= link_to 'Show', history
+          %td= link_to 'Edit', edit_history_path(history)
+          %td= link_to 'Destroy', history, data: { confirm: 'Are you sure?' }, method: :delete

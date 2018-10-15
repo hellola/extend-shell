@@ -1,0 +1,18 @@
+.page-header
+  = link_to functions_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_function_path(@function), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show function
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @function.name
+  %dt Body:
+  %dd= @function.body
+  %dt Location:
+  %dd= @function.location
+  %dt Operating system:
+  %dd= @function.operating_system

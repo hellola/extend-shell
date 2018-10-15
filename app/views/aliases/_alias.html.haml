@@ -1,0 +1,11 @@
+- if local_assigns[:alias]
+  - als = local_assigns[:alias]
+.row
+  .col-md-3
+    =als.name
+  .col-md-3.code
+    =als.command
+  .col-md-3
+    =als.location&.name
+  .col-md-3
+    =als.operating_system&.name || 'none'

@@ -1,0 +1,22 @@
+.page-header
+  = link_to new_operating_system_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Operating system
+  %h1 Listing operating_systems
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th
+        %th
+        %th
+
+    %tbody
+      - @operating_systems.each do |operating_system|
+        %tr
+          %td= operating_system.name
+          %td= link_to 'Show', operating_system
+          %td= link_to 'Edit', edit_operating_system_path(operating_system)
+          %td= link_to 'Destroy', operating_system, data: { confirm: 'Are you sure?' }, method: :delete

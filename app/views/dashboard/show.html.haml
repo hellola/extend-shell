@@ -1,0 +1,13 @@
+.page-header.pad-top
+  %h1 Dashboard
+.container
+  .panel.panel-default
+    .panel-heading Hotkeys
+    .panel-body
+      = render Hotkey.order(id: :desc, created_at: :desc).limit(10)
+  .panel.panel-default
+    .panel-heading Aliases
+    .panel-body
+      - aliases = Alias.order(id: :desc, created_at: :desc).limit(10)
+      - aliases.each do |als|
+        = render als

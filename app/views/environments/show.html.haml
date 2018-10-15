@@ -1,0 +1,18 @@
+.page-header
+  = link_to environments_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_environment_path(@environment), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show environment
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @environment.name
+  %dt Value:
+  %dd= @environment.value
+  %dt Location:
+  %dd= @environment.location
+  %dt Operating system:
+  %dd= @environment.operating_system

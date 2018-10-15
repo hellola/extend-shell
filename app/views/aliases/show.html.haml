@@ -1,0 +1,18 @@
+.page-header
+  = link_to aliases_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_alias_path(@alias), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show alias
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @alias.name
+  %dt Command:
+  %dd= @alias.command
+  %dt Location:
+  %dd= @alias.location
+  %dt Operating system:
+  %dd= @alias.operating_system

@@ -1,0 +1,12 @@
+.page-header
+  = link_to hotkey_types_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_hotkey_type_path(@hotkey_type), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show hotkey_type
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @hotkey_type.name

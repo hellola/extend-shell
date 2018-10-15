@@ -1,0 +1,10 @@
+.page-header
+  = link_to operating_systems_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to @operating_system, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-info-sign
+    Show
+  %h1 Editing operating_system
+
+= render 'form'

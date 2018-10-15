@@ -1,0 +1,14 @@
+.page-header
+  = link_to histories_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_history_path(@history), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show history
+
+%dl.dl-horizontal
+  %dt Command:
+  %dd= @history.command
+  %dt Location:
+  %dd= @history.location

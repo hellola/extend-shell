@@ -1,0 +1,28 @@
+.page-header
+  = link_to new_environment_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Environment
+  %h1 Listing environments
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Value
+        %th Location
+        %th Operating system
+        %th
+        %th
+        %th
+
+    %tbody
+      - @environments.each do |environment|
+        %tr
+          %td= environment.name
+          %td= environment.value
+          %td= environment.location.name
+          %td= environment.operating_system.name
+          %td= link_to 'Show', environment
+          %td= link_to 'Edit', edit_environment_path(environment)
+          %td= link_to 'Destroy', environment, data: { confirm: 'Are you sure?' }, method: :delete

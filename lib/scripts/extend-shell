@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'eventmachine'
+require 'byebug'
+require 'json'
+
+class ExtendClient < EventMachine::Connection
+  def post_init
+    send_data "-p #{Dir.pwd.tr(' ', '^')} #{ARGV.join(' ')}"
+    found = (ARGV.join(' ').strip =~ /(extend-exit)$/i)
+    #close_connection_after_writing if found != nil
+  end
+
+  def unbind
+    puts "terminated #{ARGV.join(' ')}"
+    EventMachine.stop
+    if !ARGV.join(' ') =~ /(extend-exit)$/i
+      start_server
+    end
+  end
+
+  def receive_data(raw_data)
+    data = JSON.parse(raw_data)
+    output_text = data['result']
+    output_text =  output_text.tr "\n", "\n"
+    output_text =  output_text.tr "\t", "\t"
+    puts output_text
+    puts `#{data['command']}` if !data['command'].empty?
+    close_connection_after_writing
+    EventMachine.stop
+  end
+end
+
+def start_server
+  return if is_running?
+  puts "starting server..."
+  server = fork do
+    exec 'extend-server'
+  end
+  File.write('/opt/extend/pid', server)
+  Process.detach(server)
+end
+
+def is_running?
+  return false unless File.exist?('/opt/extend/pid')
+  pid = File.read('/opt/extend/pid')
+  begin
+    Process.getpgid(pid.to_i)
+    true
+  rescue Errno::ESRCH
+    false
+  end
+end
+
+EventMachine.run {
+  server_ip = ENV['extend_server_ip'] || '127.0.0.1'
+  port = ENV['extend_server_port'] || '8081'
+  EventMachine::connect server_ip, port.to_i, ExtendClient
+}

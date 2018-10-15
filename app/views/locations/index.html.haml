@@ -1,0 +1,24 @@
+.page-header
+  = link_to new_location_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Location
+  %h1 Listing locations
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Path
+        %th Host
+        %th
+        %th
+        %th
+
+    %tbody
+      - @locations.each do |location|
+        %tr
+          %td= location.path
+          %td= location.host
+          %td= link_to 'Show', location
+          %td= link_to 'Edit', edit_location_path(location)
+          %td= link_to 'Destroy', location, data: { confirm: 'Are you sure?' }, method: :delete

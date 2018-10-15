@@ -1,0 +1,26 @@
+.page-header
+  = link_to hotkeys_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_hotkey_path(@hotkey), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show hotkey
+
+%dl.dl-horizontal
+  %dt Key:
+  %dd= @hotkey.key
+  %dt Command:
+  %dd= @hotkey.command
+  %dt Location:
+  %dd= @hotkey.location
+  %dt Executes:
+  %dd= @hotkey.executes
+  %dt Name:
+  %dd= @hotkey.name
+  %dt Hotkey type:
+  %dd= @hotkey.hotkey_type
+  %dt Parent:
+  %dd= @hotkey.parent
+  %dt Operating system:
+  %dd= @hotkey.operating_system

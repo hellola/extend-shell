@@ -1,0 +1,2 @@
+module HotkeysHelper
+end
