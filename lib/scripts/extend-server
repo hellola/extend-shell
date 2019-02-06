@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
+require 'extend_parser'
+
+
 EventMachine::run {
   port = ENV['extend_server_port'] || '8081'
+  RUN.call('startup exec'.split(' '))
   EventMachine::start_server('0.0.0.0', port.to_i, ExtendHooks)
   puts 'running extend server on 8081'
 }
+
