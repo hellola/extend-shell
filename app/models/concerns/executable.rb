@@ -27,7 +27,6 @@ module Executable
   end
   module_function :parse_exec_id
 
-
   included do
     def execute_sync
       `#{command}`

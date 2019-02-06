@@ -4,8 +4,8 @@ class Hotkey < ApplicationRecord
   include Executable
 
   belongs_to :hotkey_type
-  belongs_to :parent, class_name: "Hotkey", foreign_key: "parent_id"
-  has_many :children, class_name: "Hotkey", foreign_key: "parent_id"
+  belongs_to :parent, class_name: 'Hotkey', foreign_key: 'parent_id'
+  has_many :children, class_name: 'Hotkey', foreign_key: 'parent_id'
   scope :with_type, -> { joins(:hotkey_type) }
 
   def self.render_window_keys(pwd = nil)
