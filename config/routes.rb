@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   concern :executable do
     get :exec, on: :member
+    get 'execute/:name', to: 'hotkeys#exec_by_name', as: 'exec_by_name', on: :collection
   end
 
   resources :startups, concerns: :executable

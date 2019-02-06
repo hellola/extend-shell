@@ -21,6 +21,17 @@ class HotkeysController < ApplicationController
   def edit
   end
 
+  def exec_by_name
+    name = params[:name]
+    @hotkey = Hotkey.find_by(name: name) if name.present?
+    success = !@hotkey.nil?
+    @hotkey&.execute
+    respond_to do |format|
+      format.json { render json: { success: success } }
+      format.html { render :index }
+    end
+  end
+
   def exec
     id = params[:id]
     @hotkey = Hotkey.find(id) if id.present?
