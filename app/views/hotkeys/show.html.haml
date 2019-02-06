@@ -13,14 +13,22 @@
   %dt Command:
   %dd= @hotkey.command
   %dt Location:
-  %dd= @hotkey.location
+  %dd= @hotkey.location&.name
   %dt Executes:
-  %dd= @hotkey.executes
+  %dd
+    = check_box @hotkey, :executes
+    = link_to 'execute', exec_hotkey_path(@hotkey), remote: true
   %dt Name:
   %dd= @hotkey.name
   %dt Hotkey type:
-  %dd= @hotkey.hotkey_type
+  %dd= @hotkey.hotkey_type&.name
   %dt Parent:
-  %dd= @hotkey.parent
+  %dd= @hotkey.parent&.name
   %dt Operating system:
-  %dd= @hotkey.operating_system
+  %dd= @hotkey.operating_system&.name
+  %dt Children:
+  %dd
+    - @hotkey.children.each do |child|
+      .row
+        = link_to child.display_name, child
+

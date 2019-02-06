@@ -4,35 +4,38 @@
     New Hotkey
   %h1 Listing hotkeys
 
-.table-responsive
-  %table.table.table-striped.table-bordered.table-hover
-    %thead
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th ID
+      %th Key
+      %th Command
+      %th Location
+      %th Executes
+      %th Name
+      %th Hotkey type
+      %th Parent
+      %th Operating system
+      %th
+      %th
+      %th
+  %tbody
+    - @hotkeys.each do |hotkey|
       %tr
-        %th ID
-        %th Key
-        %th Command
-        %th Location
-        %th Executes
-        %th Name
-        %th Hotkey type
-        %th Parent
-        %th Operating system
-        %th
-        %th
-        %th
-
-    %tbody
-      - @hotkeys.each do |hotkey|
-        %tr
-          %td= hotkey.id
-          %td= hotkey.key
-          %td= hotkey.command
-          %td= hotkey.location
-          %td= hotkey.executes
-          %td= hotkey.name
-          %td= hotkey.hotkey_type&.name || 'none'
-          %td= hotkey.parent&.name || 'none'
-          %td= hotkey.operating_system&.name || 'none'
-          %td= link_to 'Show', hotkey
-          %td= link_to 'Edit', edit_hotkey_path(hotkey)
-          %td= link_to 'Destroy', hotkey, data: { confirm: 'Are you sure?' }, method: :delete
+        %td= link_to hotkey.id, hotkey
+        %td= hotkey.key
+        %td= hotkey.command
+        %td= hotkey.location&.name
+        %td
+          = hotkey.executes
+          - if hotkey.executes
+            = link_to 'execute', exec_hotkey_path(hotkey), remote: true
+        %td= hotkey.name
+        %td= hotkey.hotkey_type&.name || 'none'
+        %td
+          - if hotkey.parent.present?
+            = link_to hotkey.name, hotkey
+        %td= hotkey.operating_system&.name || 'none'
+        %td= link_to 'Show', hotkey
+        %td= link_to 'Edit', edit_hotkey_path(hotkey)
+        %td= link_to 'Destroy', hotkey, data: { confirm: 'Are you sure?' }, method: :delete

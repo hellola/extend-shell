@@ -21,27 +21,28 @@
   .form-group
     = f.label :location, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :location, class: 'form-control'
+      = f.select :location_id, options_from_collection_for_select(Location.all.order(:id),"id",->(location) { "#{location.id} #{location.name}" }, @hotkey.location.id), {}, class: 'form-control'
+
   .form-group
     = f.label :executes, class: 'col-sm-2 control-label'
     .col-sm-10
       = f.check_box :executes, class: 'form-control'
   .form-group
-    = f.label :name, class: 'col-sm-2 control-label'
+    = f.label :raw_name, class: 'col-sm-2 control-label'
     .col-sm-10
       = f.text_field :name, class: 'form-control'
   .form-group
     = f.label :hotkey_type, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :hotkey_type, class: 'form-control'
+      = f.select :hotkey_type_id, options_from_collection_for_select(HotkeyType.all.order(:id),"id",:name, @hotkey.hotkey_type_id),{}, class: 'form-control'
   .form-group
     = f.label :parent, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :parent, class: 'form-control'
+      = f.select :parent_id, options_from_collection_for_select(Hotkey.all.order(:id),"id",->(hotkey) { "#{hotkey.id} #{hotkey.name}" }, @hotkey.parent_id), {}, class: 'form-control'
   .form-group
     = f.label :operating_system, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :operating_system, class: 'form-control'
+      = f.select :operating_system_id, options_from_collection_for_select(OperatingSystem.all.order(:id),"id",->(os) { "#{os.id} #{os.name}" }, @hotkey.operating_system_id),{}, class: 'form-control'
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary'
