@@ -1,0 +1,17 @@
+[Unit]
+Description=Extend Service
+After=systemd-networkd.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ewoudt/Dev/extend/
+ExecStart=/usr/bin/zsh -c '/home/ewoudt/.rbenv/shims/bundle exec rails r lib/scripts/extend-server'
+Restart=always
+TimeoutSec=30
+RestartSec=15
+StandardOutput=journal
+User=ewoudt
+Group=ewoudt
+
+[Install]
+WantedBy=multi-user.target
