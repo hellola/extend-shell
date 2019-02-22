@@ -11,6 +11,7 @@ class OperatingSystem < ApplicationRecord
   def self.get_current
     os_info = `cat /etc/*-release`
     info = Util::hashify_linux_style(os_info)
-    info['ID_LIKE']
+    return info['ID_LIKE'] if info['ID_LIKE'].present?
+    return 'archlinux' if info['ID'] == 'arch'
   end
 end
