@@ -61,13 +61,17 @@ command :startup do |c|
   c.desc 'executes startup actions'
   c.command :exec do |exec|
     exec.action do |global_options, options, args|
-      $result = "STARTUP:\n"
-      Startup.all.order(:order).each do |startup| 
-        $result += "#{startup.name}\n"
-        startup.execute_sync
-        sleep 1
+      if Startup.should_run?
+        $result = "STARTUP:\n"
+        Startup.all.order(:order).each do |startup| 
+          $result += "#{startup.name}\n"
+          startup.execute_sync
+          sleep 1
+        end
+        $result += 'DONE'
+      else
+        $result = 'ALREADY RAN STARTUP'
       end
-      $result += "DONE"
     end
   end
 end
