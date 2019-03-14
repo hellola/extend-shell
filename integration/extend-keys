@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+require 'io/console'
+require 'yaml'
+require 'byebug'
+require 'commander/import'
+
+$extend_path = ENV['extend_path']
+
+def read_char
+  STDIN.echo = false
+  STDIN.raw!
+
+  input = STDIN.getc.chr
+  if input == "\e" then
+    input << STDIN.read_nonblock(3) rescue nil
+    input << STDIN.read_nonblock(2) rescue nil
+  end
+ensure
+  STDIN.echo = true
+  STDIN.cooked!
+
+  return input
+end
+
+class Spacer
+  def initialize(data_file)
+    @keys = YAML.load_file(data_file)
+  end
+
+  def start
+    quit = false
+    current_level = @keys
+    list_options(current_level)
+    while !quit
+      c = read_char
+      case c
+      when '\''
+        if !@possibly_chosen.nil?
+          paste_command(@possibly_chosen)
+          exit
+        end
+      when 'q'
+        if current_level[c].nil?
+          exit
+        end
+      end
+
+      if current_level[c].nil?
+        puts 'no command found'
+        return
+      end
+      current_level = current_level[c]
+      if !current_level[:name].nil?
+        if current_level[:mnemonic].nil?
+          paste_command(current_level[:name])
+        else
+          puts "press ' to choose command: #{current_level[:name]}"
+          @possibly_chosen = current_level[:command]
+        end
+      end
+      list_options(current_level)
+    end
+  end
+
+  def paste_command(command)
+    $stdout.puts command
+    exit
+  end
+
+  def show_current_level(current_level, depth = 0)
+    depth.times do |i|
+      print "\t"
+    end
+    if current_level[:mnemonic]
+      puts "#{current_level[:mnemonic][0]}: #{current_level[:mnemonic]}"
+    else
+      puts "#{current_level[:name]}"
+    end
+  end
+
+  def list_options(current_level)
+    ignored = [:mnemonic, :name, :command]
+    show_current_level(current_level)
+    if current_level[:name]
+      puts current_level[:name]
+    end
+    current_level.each do |k,v|
+      if !ignored.include? k
+        show_current_level(current_level[k], 1)
+      end
+    end
+    false
+  end
+end
+
+
+
+program :name, 'extend-keys'
+program :version, '0.0.1'
+program :description, 'extend-shells keyboard extensions'
+
+command :start do |c|
+  c.syntax = 'extend-keys start'
+  c.summary = 'starts the terminal key selection'
+  c.description = 'starts the terminal key selection'
+  c.example 'starts extend-keys', 'extend-keys start'
+  c.action do |args, options|
+    s = Spacer.new("#{$extend_path}/keys.yml")
+    s.start
+  end
+end
