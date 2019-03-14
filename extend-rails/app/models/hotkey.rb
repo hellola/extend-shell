@@ -27,9 +27,13 @@ class Hotkey < ApplicationRecord
     root.join(renderer.joiner)
   end
 
-  def name
-    return "#{parent.name}-#{self[:name]}" if parent.present?
-    self[:name]
+  def full_key
+    "#{parent.key}-#{full_key}" if parent.present?
+    key
+  end
+
+  def gen_full_name
+    "#{parent.name}-#{self[:name]}" if parent.present?
   end
 
   def display_name

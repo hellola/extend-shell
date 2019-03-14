@@ -23,7 +23,7 @@ class HotkeysController < ApplicationController
 
   def exec_by_name
     name = params[:name]
-    @hotkey = Hotkey.find_by(name: name) if name.present?
+    @hotkey = Hotkey.where('name = ? OR full_name = ?',name, name).first if name.present?
     success = !@hotkey.nil?
     @hotkey&.execute
     respond_to do |format|

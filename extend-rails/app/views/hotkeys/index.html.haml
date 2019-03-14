@@ -23,7 +23,7 @@
     - @hotkeys.each do |hotkey|
       %tr
         %td= link_to hotkey.id, hotkey
-        %td= hotkey.key
+        %td= hotkey.full_key
         %td= hotkey.command
         %td= hotkey.location&.name
         %td
