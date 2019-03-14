@@ -17,7 +17,7 @@ class Startup < ApplicationRecord
 
   def self.should_run?
     return false if File.exist?('/tmp/extend')
-    FileUtil.touch('/tmp/extend')
+    FileUtils.touch('/tmp/extend')
     true
   end
 

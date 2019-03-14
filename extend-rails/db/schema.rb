@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180821045946) do
+ActiveRecord::Schema.define(version: 20190314033226) do
 
   create_table "aliases", force: :cascade do |t|
     t.string "name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20180821045946) do
     t.integer "operating_system_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "full_name"
     t.index ["location_id"], name: "index_hotkeys_on_location_id"
   end
 
