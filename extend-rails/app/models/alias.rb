@@ -21,6 +21,11 @@ class Alias < ApplicationRecord
     als.save
   end
 
+  def to_raw
+    # TODO add operating system and path for full rawness
+    "extend-shell alias add #{name}=#{command}"
+  end
+
   def destruct(name)
     "unalias #{shortcut}-#{name}\n" +
     "unalias #{shortcut}\n"
