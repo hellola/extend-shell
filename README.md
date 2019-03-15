@@ -1,23 +1,24 @@
 # Extend Shell
 ## What/Why?
-  Aims to make a consistent and sensible experience using mnemonic keys and aliases.
-  Examples include: 
-    - Aliases
-      - ffs-file-free-space
-      - sr-system-restart
-      - mp-music-pause
-    - Window Manager Hotkeys uses chords (the semicolon is read as 'and then')
-      - alt + m ; p (music-pause)
-      - alt + s ; r (system-restart)
-    
-  The rationale behind using the initial letter for every word is to make tab completion heavenly in the case of aliases or functions, the alias renderer also generates an alias with just the first part: `alias ffs=ffs-file-free-space`
-  Aims to centralise and streamline adding aliases or keybindings, making a setup easy to backup
+  **Aims to centralise and streamline adding aliases, functions and keybindings, across systems**
   An abstraction layer for:
   - Window manager key bindings (Currently only have an SxhkdRenderer)
   - ZSH key bindings
   - Tmux key bindings
   - ZSH Aliases
   Support for same commands / aliases but on different operating systems by detecting and filtering commands by operating system
+
+  **Aims to make a consistent, predictable and searchable experience using mnemonic keys and aliases.**
+  Examples include: 
+  - Aliases
+    - ffs-file-free-space
+    - sr-system-restart
+    - mp-music-pause
+  - Window Manager Hotkeys uses chords (the semicolon is read as 'and then')
+    - alt + m ; p (music-pause)
+    - alt + s ; r (system-restart)
+    
+  The rationale behind using the initial letter for every word is to make tab completion heavenly in the case of aliases or functions, the alias renderer also generates an alias with just the first part: `alias ffs=ffs-file-free-space`
   There is initial support for directory specific aliases but needs to be refined
   Bash support has not been tested or tried, though theoretically should be ok. Let me know about your bash experience, we would like it to work everywhere.
 
@@ -36,9 +37,9 @@
 
 ## Integrations
   These are stored in the integration folder, you have to link them manually for now:
-    - Rofi integration called extend_rofi.sh
-    - A dmenu integration wouldn't be much more work
-    - fzf integration in `integration/fzf_search.zsh` which currently hardcodes (uegh) the search key in ZSH to Control-S (^S)
+  - Rofi integration called extend_rofi.sh
+  - A dmenu integration wouldn't be much more work
+  - fzf integration in `integration/fzf_search.zsh` which currently hardcodes (uegh) the search key in ZSH to Control-S (^S)
 
 ## Starting
   - The current starting process is very manual, I have a script that starts things.
@@ -57,12 +58,13 @@
   The `sync` command writes all configuration to files that are loaded by zsh, tmux, sxhkd etc
   
 ## TODO
- - extend-client (extend-shell executable) is badly implemented, should be doing the command handling on the client side and sending
-   a structured command to the websocket instead of it being purely a command forwarder..
+ - make window manager renderer configurable
  - hammerspoon renderer, chorded: http://www.hammerspoon.org/docs/hs.hotkey.modal.html
  - autohotkey renderer with chords, not sure how to do that
  - make key bindings in a category shareable / installable, for example standard git related commands
  - add descriptions to storable commands
+ - extend-client (extend-shell executable) is badly implemented, should be doing the command handling on the client side and sending
+   a structured command to the websocket instead of it being purely a command forwarder..
  - Model installed applications and multiple os paths to install them:
    - chocolatey for windows
    - brew for mac
