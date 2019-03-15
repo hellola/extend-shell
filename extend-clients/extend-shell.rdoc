@@ -1,0 +1,5 @@
+= extend-shell
+
+Generate this with
+    extend-shell rdoc
+After you have described your command line interface
