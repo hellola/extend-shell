@@ -1,6 +1,8 @@
 # Extend Shell
 ## What/Why?
-  **Aims to centralise and streamline adding aliases, functions and keybindings, across systems**
+
+### Aims to centralise and streamline adding aliases, functions and keybindings, across systems
+  
   An abstraction layer for:
   - Window manager key bindings (Currently only have an SxhkdRenderer)
   - ZSH key bindings
@@ -8,7 +10,8 @@
   - ZSH Aliases
   Support for same commands / aliases but on different operating systems by detecting and filtering commands by operating system
 
-  **Aims to make a consistent, predictable and searchable experience using mnemonic keys and aliases.**
+### Aims to make a consistent, predictable and searchable experience using mnemonic keys and aliases.
+
   Examples include: 
   - Aliases
     - ffs-file-free-space
@@ -19,8 +22,16 @@
     - alt + s ; r (system-restart)
     
   The rationale behind using the initial letter for every word is to make tab completion heavenly in the case of aliases or functions, the alias renderer also generates an alias with just the first part: `alias ffs=ffs-file-free-space`
+
   There is initial support for directory specific aliases but needs to be refined
   Bash support has not been tested or tried, though theoretically should be ok. Let me know about your bash experience, we would like it to work everywhere.
+
+### Make the terminal great again
+
+  I love console, though the learning curve is a pain, some console commands can be really obscure and the element of least surprise is definately 
+  not considered when naming console commands. _There are few conventions._ This makes introducing or teaching terminal use to someone very painful. Even if you are a console veteran there are some commands that have to be looked up repeatedly.
+  This is what it could be like: (this uses the fzf_search integration)
+  [![asciicast](https://asciinema.org/a/mm31usXGPLO3k6NS9t25ngAFz.svg)](https://asciinema.org/a/mm31usXGPLO3k6NS9t25ngAFz?t=6)
 
 ## Installation
   - clone the repo somewhere
@@ -45,7 +56,7 @@
   - The current starting process is very manual, I have a script that starts things.
 ### The Socket Server
   `bundle exec rails r lib/scripts/extend-server`
-### The rails Server 
+### The Rails Server 
   `bundle exec rails s -b 0.0.0.0 -p 3030`
   I've bound to 0.0.0.0 because I use the api to execute hotkeys over the network
 
