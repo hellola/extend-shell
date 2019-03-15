@@ -1,13 +1,30 @@
 require 'gli'
+require_relative 'extend_shell'
+
+# This ugliness is due to using GLI over an EventMachine connection
+$original_stderr = $stderr
+$original_stdout = $stdout
+$stdout = StringIO.new
+$stderr = StringIO.new
+$stdout.sync = true
+$stderr.sync = true
 
 include GLI::App
+GLI::Commands::Help.skips_around = false
 
-#TODO maybe redo parse so i dont have to use these?
 $result=""
 $command=""
 $extend_path=ENV['extend_path']
 
 program_desc 'Describe your application here'
+
+around do |global_options,command,options,arguments,code|
+  # $result += "around call...#{global_options}, #{command}"
+  code.call
+  $result += $stderr.string
+  $result += $stdout.string
+end
+
 
 version ExtendShell::VERSION
 
@@ -23,6 +40,7 @@ desc 'The current path'
 arg_name 'path'
 default_value ''
 flag [:p,:path]
+
 
 desc 'Sync files'
 command :sync do |c|
@@ -360,6 +378,7 @@ post do |global,command,options,args|
 end
 
 on_error do |exception|
+  $result += exception.to_s
   # Error logic here
   # return false to skip default error handling
   true

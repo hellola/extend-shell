@@ -4,7 +4,7 @@ class Alias < ApplicationRecord
   include Executable
 
   def render
-    "alias #{shortcut}-#{name}='#{command}' ##{id}\n" +
+    "alias #{shortcut}-#{full_name}='#{command}' ##{id}\n" +
     "alias #{shortcut}='#{command}'"
   end
 

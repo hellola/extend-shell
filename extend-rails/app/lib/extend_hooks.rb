@@ -7,14 +7,15 @@ module ExtendHooks
 
   def receive_data data
     if data.strip =~ /(extend-exit)$/i
-      send_data ({ result: 'exited', command: 'exit' }).to_json
+      send_data({ result: 'exited', command: 'exit' }.to_json)
       close_connection_after_writing
       EventMachine.stop
     else
       puts "recieved command: #{data}"
       args = data.split(' ')
+      $result = ''
       RUN.call(args)
-      send_data ({ result: $result, command: $command }).to_json
+      send_data({ result: $result, command: $command }.to_json)
       close_connection_after_writing
     end
   end

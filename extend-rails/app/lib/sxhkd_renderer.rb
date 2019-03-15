@@ -2,11 +2,11 @@ require 'hotkey_renderer'
 
 class SxhkdRenderer < HotkeyRenderer
   def render_leaf(stack, hotkey)
-    "##{hotkey.name} (#{hotkey.id})\n#{stack} ; #{hotkey.key}\n  #{hotkey.command}\n\n"
+    "##{hotkey.full_name} (#{hotkey.id})\n#{stack} ; #{hotkey.key}\n  #{hotkey.command}\n\n"
   end
 
   def render_standalone(stack, hotkey)
-    "##{hotkey.name} (#{hotkey.id})\n#{stack} #{hotkey.key}\n  #{hotkey.command}\n\n"
+    "##{hotkey.full_name} (#{hotkey.id})\n#{stack} #{hotkey.key}\n  #{hotkey.command}\n\n"
   end
 
   def render_branch(stack, hotkey)
