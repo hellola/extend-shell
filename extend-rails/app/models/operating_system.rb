@@ -1,3 +1,4 @@
+
 class OperatingSystem < ApplicationRecord
   has_many :hotkeys
   has_many :aliases
@@ -9,9 +10,13 @@ class OperatingSystem < ApplicationRecord
   end
 
   def self.get_current
-    os_info = `cat /etc/*-release`
-    info = Util::hashify_linux_style(os_info)
-    return info['ID_LIKE'] if info['ID_LIKE'].present?
-    return 'archlinux' if info['ID'] == 'arch'
+    if OS.linux?
+      os_info = `cat /etc/*-release`
+      info = Util::hashify_linux_style(os_info)
+      return info['ID_LIKE'] if info['ID_LIKE'].present?
+      'archlinux' if info['ID'] == 'arch'
+    elsif OS.mac?
+      'mac'
+    end
   end
 end

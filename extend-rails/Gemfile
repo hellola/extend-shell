@@ -13,6 +13,7 @@ gem 'eventmachine'
 gem 'commander'
 gem 'byebug'
 gem 'gli'
+gem 'os'
 
 gem 'pry'
 gem 'pry-rails'
