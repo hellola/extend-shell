@@ -4,7 +4,7 @@ require 'yaml'
 require 'byebug'
 require 'commander/import'
 
-$extend_path = '/opt/extend'
+$extend_path=ENV['EXTEND_PATH'] || '/opt/extend'
 
 def read_char
   STDIN.echo = false

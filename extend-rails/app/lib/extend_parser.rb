@@ -14,7 +14,7 @@ GLI::Commands::Help.skips_around = false
 
 $result=""
 $command=""
-$extend_path=ENV['extend_path']
+$extend_path=ENV['EXTEND_PATH'] || '/opt/extend'
 
 program_desc 'Describe your application here'
 
