@@ -6,7 +6,7 @@ class Hotkey < ApplicationRecord
   include Executable
 
   belongs_to :hotkey_type
-  belongs_to :parent, class_name: 'Hotkey', foreign_key: 'parent_id'
+  belongs_to :parent, class_name: 'Hotkey', foreign_key: 'parent_id', optional: true
   has_many :children, class_name: 'Hotkey', foreign_key: 'parent_id'
   scope :with_type, -> { joins(:hotkey_type) }
 
@@ -16,6 +16,10 @@ class Hotkey < ApplicationRecord
 
   def os
     operating_system
+  end
+
+  def os=(val)
+    self.operating_system = val
   end
 
   def window_manager_renderer
@@ -129,17 +133,23 @@ class Hotkey < ApplicationRecord
       key: hotkey_key,
       command: command.strip,
       location: Location.find_or_create_from_path(path),
-      parent: found_parent, hotkey_type: wm_type,
+      parent: found_parent,
+      hotkey_type: wm_type,
       executes: execs
     )
     hk.apply_global_options(global_options)
+    if found_parent.new_record?
+      found_parent.location = hk.location
+      found_parent.os = hk.os
+      found_parent.save!
+    end
     return 'duplicate key!' if check_for_duplicate(found_parent, hk)
     if category.present?
       category.split(' ').each do |cat|
         hk.categories << Category.find_or_create_by(name: cat)
       end
     end
-    hk.save
+    hk.save!
     'key added..'
   end
 
@@ -156,8 +166,12 @@ class Hotkey < ApplicationRecord
       parent = nil
       keys[0..-2].each do |key|
         found_parent = Hotkey.find_by(key: key.strip, parent_id: parent)
-        found_parent = Hotkey.create(key: key.strip, hotkey_type: type,
-                                     parent_id: parent.id) if found_parent.nil?
+        if found_parent.nil?
+          found_parent =
+            Hotkey.create(key: key.strip,
+                          hotkey_type: type,
+                          parent_id: parent&.id)
+        end
         parent = found_parent
       end
       hotkey_key = keys.last.strip
