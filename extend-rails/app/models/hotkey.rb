@@ -133,7 +133,6 @@ class Hotkey < ApplicationRecord
       executes: execs
     )
     hk.apply_global_options(global_options)
-    hk.executes = true
     return 'duplicate key!' if check_for_duplicate(found_parent, hk)
     if category.present?
       category.split(' ').each do |cat|
