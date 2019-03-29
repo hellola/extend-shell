@@ -4,6 +4,11 @@ class HotkeyRenderer
     "\n"
   end
 
+  # Use this to render any specific stack details
+  def render_branch_head(stack, hotkey)
+    ''
+  end
+
   def render_leaf(stack, hotkey)
     raise 'Not implemented'
   end

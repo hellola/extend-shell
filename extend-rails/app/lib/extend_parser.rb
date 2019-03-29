@@ -2,12 +2,15 @@ require 'gli'
 require_relative 'extend_shell'
 
 # This ugliness is due to using GLI over an EventMachine connection
-$original_stderr = $stderr
-$original_stdout = $stdout
-$stdout = StringIO.new
-$stderr = StringIO.new
-$stdout.sync = true
-$stderr.sync = true
+# dont do this when calling the file directly
+if __FILE__ != $0
+  $original_stderr = $stderr
+  $original_stdout = $stdout
+  $stdout = StringIO.new
+  $stderr = StringIO.new
+  $stdout.sync = true
+  $stderr.sync = true
+end
 
 include GLI::App
 GLI::Commands::Help.skips_around = false
@@ -21,8 +24,10 @@ program_desc 'Describe your application here'
 around do |global_options,command,options,arguments,code|
   # $result += "around call...#{global_options}, #{command}"
   code.call
-  $result += $stderr.string
-  $result += $stdout.string
+  if __FILE__ != $0
+    $result += $stderr.string
+    $result += $stdout.string
+  end
 end
 
 
@@ -382,6 +387,10 @@ on_error do |exception|
   # Error logic here
   # return false to skip default error handling
   true
+end
+
+if __FILE__ == $0
+  self.run(ARGV)
 end
 
 # make the run method accessible externally
