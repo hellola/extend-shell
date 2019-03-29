@@ -34,7 +34,7 @@
         %td= hotkey.hotkey_type&.name || 'none'
         %td
           - if hotkey.parent.present?
-            = link_to hotkey.name, hotkey
+            = link_to hotkey.parent.name, hotkey.parent
         %td= hotkey.operating_system&.name || 'none'
         %td= link_to 'Show', hotkey
         %td= link_to 'Edit', edit_hotkey_path(hotkey)
