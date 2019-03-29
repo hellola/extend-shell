@@ -119,12 +119,19 @@ class Hotkey < ApplicationRecord
     "bind -n #{key} #{command}#{newline}"
   end
 
-  def self.create_window_manager_hotkey_from_raw(name, raw_hotkey, category, path, global_options)
+  def self.create_window_manager_hotkey_from_raw(name, raw_hotkey, execs, category, path, global_options)
     wm_type = HotkeyType.find_by(name: 'window_manager')
     keys, command = Util::parse_key_value(raw_hotkey)
     keys = keys.split(',')
     found_parent, hotkey_key = parse_from_keys(keys, wm_type)
-    hk = Hotkey.new(name: name, key: hotkey_key, command: command.strip, location: Location.find_or_create_from_path(path), parent: found_parent, hotkey_type: wm_type)
+    hk = Hotkey.new(
+      name: name,
+      key: hotkey_key,
+      command: command.strip,
+      location: Location.find_or_create_from_path(path),
+      parent: found_parent, hotkey_type: wm_type,
+      executes: execs
+    )
     hk.apply_global_options(global_options)
     hk.executes = true
     return 'duplicate key!' if check_for_duplicate(found_parent, hk)

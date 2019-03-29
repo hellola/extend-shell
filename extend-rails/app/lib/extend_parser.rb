@@ -263,6 +263,7 @@ command :key do |c|
   c.command 'add-wm' do |add|
     add.desc 'whether to be only for the current path'
     add.switch [:o, :only]
+    add.switch [:e, :exec]
     add.action do |global_options, options, args|
       if args.length == 1
         $result = 'missing argument, requires a name and the key /action pair'
@@ -273,7 +274,8 @@ command :key do |c|
       # cat = args[1] if args.length > 1
       cat = nil
       path = Util::sanitize_path(global_options[:path]) if options[:only]
-      $result = Hotkey.create_window_manager_hotkey_from_raw(name, hotkey, cat, path, global_options)
+      execs = options[:exec]
+      $result = Hotkey.create_window_manager_hotkey_from_raw(name, hotkey, execs, cat, path, global_options)
     end
   end
 
