@@ -94,6 +94,7 @@ class Hotkey < ApplicationRecord
       if recursive
         rendered += adapter.render_branch(stack, self)
       else
+        rendered += adapter.render_branch_head(stack, self)
         stack += adapter.render_branch(stack, self)
         children.each do |c|
           rendered += c.render_with_children(stack, adapter)
