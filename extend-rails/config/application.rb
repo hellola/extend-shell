@@ -19,5 +19,7 @@ module Extend
       'Access-Control-Allow-Origin' => '*',
       'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
     }
+
+    config.ext = Rails.application.config_for(:extend)
   end
 end

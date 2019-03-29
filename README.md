@@ -62,6 +62,7 @@
   
 ## Configuration
 You can change some default settings by using environment variables:
+- Set the window manager hotkey renderer by setting `EXTEND_WM_{OS}_RENDERER_` to the name of the renderer.
 - Set the database path by setting `EXTEND_DB_PATH` to the path you prefer.
 
 ## Usage

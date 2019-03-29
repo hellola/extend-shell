@@ -1,3 +1,5 @@
+require 'extend_config'
+
 class Hotkey < ApplicationRecord
   include Shortcut
   include StorableCommand
@@ -9,12 +11,21 @@ class Hotkey < ApplicationRecord
   scope :with_type, -> { joins(:hotkey_type) }
 
   def self.render_window_keys(pwd = nil)
-    render_using_renderer(renderer: SxhkdRenderer.new, default_stack: 'alt')
+    render_using_renderer(renderer: ExtendConfig.window_manager_renderer, default_stack: 'alt')
+  end
+
+  def os
+    operating_system
+  end
+
+  def window_manager_renderer
+    renderer = Rails.config.x.window_manager.renderer
+    eval "#{renderer}.new"
   end
 
   def self.render_window_menu_keys(pwd = nil)
     '[' +
-      render_using_renderer(renderer: RadMenuRenderer.new, recursive: true) +
+      render_using_renderer(renderer: ExtendConfig.window_manager_renderer, recursive: true) +
       ']'
   end
 
