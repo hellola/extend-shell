@@ -264,6 +264,10 @@ command :key do |c|
     add.desc 'whether to be only for the current path'
     add.switch [:o, :only]
     add.action do |global_options, options, args|
+      if args.length == 1
+        $result = 'missing argument, requires a name and the key /action pair'
+        return
+      end
       name = args[0]
       hotkey = args[1..-1].join(' ')
       # cat = args[1] if args.length > 1
