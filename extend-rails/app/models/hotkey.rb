@@ -11,7 +11,7 @@ class Hotkey < ApplicationRecord
   scope :with_type, -> { joins(:hotkey_type) }
 
   def self.render_window_keys(pwd = nil)
-    render_using_renderer(renderer: ExtendConfig.window_manager_renderer, default_stack: 'alt')
+    render_using_renderer(renderer: ExtendConfig.window_manager_renderer, default_stack: ExtendConfig.wm_modifier)
   end
 
   def os
@@ -65,7 +65,7 @@ class Hotkey < ApplicationRecord
 
   def full_key
     return "#{parent.full_key};#{self[:key]}" if parent.present?
-    return "alt-#{self[:key]}" if parent.nil?
+    return "#{ExtendConfig.wm_modifier}-#{self[:key]}" if parent.nil?
     self[:key]
   end
 

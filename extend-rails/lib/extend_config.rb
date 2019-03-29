@@ -1,4 +1,7 @@
 module ExtendConfig
+  def self.wm_modifier
+    Rails.application.config.ext['window_manager']['modifier']
+  end
   def self.window_manager_renderer
     renderer_class =
       if OS.mac?

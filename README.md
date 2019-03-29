@@ -77,6 +77,7 @@ Will render to bind keys alt+c ; r (alt+c and then r) to reload the hammerspoon 
 You can change some default settings by using environment variables:
 - Set the window manager hotkey renderer by setting `EXTEND_WM_{OS}_RENDERER_` to the name of the renderer.
 - Set the database path by setting `EXTEND_DB_PATH` to the path you prefer.
+- Set the window manager modifier by setting `EXTEND_WM_MODIFIER` to the preffered modifier, default is 'alt'.
 
 ## Usage
 ### Web Admin

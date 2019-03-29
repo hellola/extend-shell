@@ -3,6 +3,7 @@ default: &default
     mac_renderer: <%= ENV['EXTEND_WM_MAC_RENDERER'] || 'Hammerspoon' %>
     windows_renderer: <%= ENV['EXTEND_WM_WINDOWS_RENDERER'] || 'Autohotkey' %>
     linux_renderer: <%= ENV['EXTEND_WM_MAC_RENDERER'] || 'Sxhkd' %>
+    modifier: <%= ENV['EXTEND_WM_MODIFIER'] || 'alt' %>
 
 production:
   <<: *default
