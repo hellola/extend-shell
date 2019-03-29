@@ -59,6 +59,10 @@
 ### The Rails Server 
   `bundle exec rails s -b 0.0.0.0 -p 3030`
   I've bound to 0.0.0.0 because I use the api to execute hotkeys over the network
+  
+## Configuration
+You can change some default settings by using environment variables:
+- Set the database path by setting `EXTEND_DB_PATH` to the path you prefer.
 
 ## Usage
 ### Web Admin
