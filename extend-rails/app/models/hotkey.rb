@@ -124,10 +124,10 @@ class Hotkey < ApplicationRecord
     keys, command = Util::parse_key_value(raw_hotkey)
     keys = keys.split(',')
     found_parent, hotkey_key = parse_from_keys(keys, wm_type)
-    return 'duplicate key!' if check_for_duplicate(found_parent, hotkey_key)
     hk = Hotkey.new(name: name, key: hotkey_key, command: command.strip, location: Location.find_or_create_from_path(path), parent: found_parent, hotkey_type: wm_type)
     hk.apply_global_options(global_options)
     hk.executes = true
+    return 'duplicate key!' if check_for_duplicate(found_parent, hk)
     if category.present?
       category.split(' ').each do |cat|
         hk.categories << Category.find_or_create_by(name: cat)
@@ -138,8 +138,8 @@ class Hotkey < ApplicationRecord
   end
 
   def self.check_for_duplicate(parent, key)
-    found = Hotkey.find_by(key: key, parent_id: parent)
-    found.present?
+    found = Hotkey.where(key: key.key, parent_id: parent, operating_system: key.os)
+    found.count.positive?
   end
 
   def self.parse_from_keys(keys, type)
