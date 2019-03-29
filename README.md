@@ -51,6 +51,19 @@
   - Rofi integration called extend_rofi.sh
   - A dmenu integration wouldn't be much more work
   - fzf integration in `integration/fzf_search.zsh` which currently hardcodes (uegh) the search key in ZSH to Control-S (^S)
+  - The window manager keys are renderer to `$extend_path/window_manager.conf`, you have to connect it to your chosen renderer.
+### Sxhkd
+Add `-c $extend_path/window_manager.conf` to your options when you start sxhkd.
+### Hammerspoon
+I symlinked the file to the hammerspoon config: 
+`ln -s /opt/extend/window_manager.conf ~/.hammerspoon/extend.lua`
+And then added this to the end of my hammerspoon `init.lua`:
+`dofile("extend.lua")`
+Note: With the hammerspoon renderer, if the hotkey is set to executes, it does a system execution. If you want to run hammerspoon code (you probably do), then it needs to be not executable.
+Example: 
+`extend-shell --os-only key add-wm --no-exec reload c,r="hs.reload()"`
+Will render to bind keys alt+c ; r (alt+c and then r) to reload the hammerspoon config.
+  
 
 ## Starting
   - The current starting process is very manual, I have a script that starts things.
