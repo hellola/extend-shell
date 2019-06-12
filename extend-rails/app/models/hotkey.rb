@@ -89,7 +89,7 @@ class Hotkey < ApplicationRecord
   def render_with_children(stack, adapter, options = {})
     default_stack = options.fetch(:default_stack, 'alt')
     recursive = options.fetch(:recursive, false)
-    rendered = ''
+    rendered = adapter.render_pre
     if children.count.zero?
       return adapter.render_standalone(default_stack, self) if stack.nil?
       return adapter.render_leaf(stack, self)

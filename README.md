@@ -88,9 +88,7 @@ You can change some default settings by using environment variables:
   The `sync` command writes all configuration to files that are loaded by zsh, tmux, sxhkd etc
   
 ## TODO
- - make window manager renderer configurable
- - hammerspoon renderer, chorded: http://www.hammerspoon.org/docs/hs.hotkey.modal.html
- - autohotkey renderer with chords, not sure how to do that
+ - autohotkey (or alternative?) renderer with chords
  - make key bindings in a category shareable / installable, for example standard git related commands
  - add descriptions to storable commands
  - extend-client (extend-shell executable) is badly implemented, should be doing the command handling on the client side and sending
