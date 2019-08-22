@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190314033226) do
+ActiveRecord::Schema.define(version: 20190617062600) do
+
+  create_table "activities", force: :cascade do |t|
+    t.string "host"
+    t.string "application"
+    t.string "title"
+    t.datetime "time_activated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "activity"
+    t.datetime "time_deactivated"
+    t.integer "activity_group_id"
+    t.index ["activity_group_id"], name: "index_activities_on_activity_group_id"
+  end
+
+  create_table "activity_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "aliases", force: :cascade do |t|
     t.string "name"

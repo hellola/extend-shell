@@ -1,0 +1,13 @@
+.page-header
+  = link_to activity_groups_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_activity_group_path(@activity_group), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1= "Activity Group: #{@activity_group.name.titleize}"
+%h2 Activities
+%ul.list-group
+  - @activity_group.activities.each do |activity|
+    %li.list-group-item= link_to activity.title, activity
+

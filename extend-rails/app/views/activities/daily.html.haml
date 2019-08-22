@@ -1,0 +1,35 @@
+.page-header
+  %h1 Daily Summary
+
+  .panel.panel-default
+    .panel-heading
+      Last Hour
+    .panel-body
+      - usage = Activity.for_last_hour.usage_per_group
+      - total = (usage.sum { |name, duration| duration } / 60.0)
+      -# - total, percent_usage = Activity.percentize(usage)
+      %span= number_to_human(total, precision: 2)
+      hours
+      = pie_chart usage, xtitle: 'Activity', ytitle: 'Minutes', library: {plotOptions: {pie: {dataLabels: {format: "<b>{point.name}</b>: {point.y} minutes, ({point.percentage:.1f}%)"}}}}
+  .panel.panel-default
+    .panel-heading
+      For Today
+    .panel-body
+      - usage = Activity.for_today.except_idle.usage_per_group
+      - total = (usage.sum { |name, duration| duration } / 60.0)
+      -# - total, percent_usage = Activity.percentize(usage)
+      %span= number_to_human(total, precision: 2)
+      hours
+      = pie_chart usage, xtitle: 'Activity', ytitle: 'Minutes', library: {plotOptions: {pie: {dataLabels: {format: "<b>{point.name}</b>: {humanizeDuration(point.y)} minutes, ({point.percentage:.1f}%)"}}}}
+  .panel.panel-default
+    .panel-heading
+      For This Week
+    .panel-body
+      - (1..5).each do |day_ago|
+        - day = DateTime.now - day_ago.days
+        - day_usage = Activity.for_day(day).except_idle.usage_per_group
+        %span= "#{day.strftime('%A')} (#{day_ago} days ago)"
+        = pie_chart day_usage, xtitle: 'Activity', ytitle: 'Minutes', library: {plotOptions: {pie: {dataLabels: {format: "<b>{point.name}</b>: {humanizeDuration(point.y)}, ({point.percentage:.1f}%)"}}}}
+
+
+

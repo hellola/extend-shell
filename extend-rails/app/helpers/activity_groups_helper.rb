@@ -1,0 +1,2 @@
+module ActivityGroupsHelper
+end

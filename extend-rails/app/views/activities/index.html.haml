@@ -1,0 +1,36 @@
+.page-header
+  = link_to new_activity_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Activity
+  %h1 Listing activities
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Group
+        %th Host
+        %th Application
+        %th Title
+        %th Time activated
+        %th Time de-activated
+        %th Duration
+        %th
+        %th
+        %th
+
+    %tbody
+      - @activities.each do |activity|
+        %tr
+          %td= activity.activity_group_name
+          %td= activity.host
+          %td= activity.application
+          %td= activity.title
+          %td= time_ago_in_words(activity.time_activated)
+          %td
+            - if activity.time_deactivated.present?
+              = time_ago_in_words(activity.time_deactivated)
+          %td= distance_of_time_in_words(activity.duration)
+          %td= link_to 'Show', activity
+          %td= link_to 'Edit', edit_activity_path(activity)
+          %td= link_to 'Destroy', activity, data: { confirm: 'Are you sure?' }, method: :delete

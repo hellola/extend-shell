@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'activities/daily'
+
+  resources :activity_groups
+  resources :activities
   get 'dashboard/show'
   get '/' => 'dashboard#show'
 

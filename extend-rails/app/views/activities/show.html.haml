@@ -1,0 +1,25 @@
+.page-header
+  = link_to activities_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_activity_path(@activity), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show activity
+
+%dl.dl-horizontal
+  %dt Group:
+  %dd= @activity.activity_group&.name
+  %dt Host:
+  %dd= @activity.host
+  %dt Application:
+  %dd= @activity.application
+  %dt Title:
+  %dd= @activity.title
+  %dt Time activated:
+  %dd= @activity.time_activated
+  %dt Time de-activated:
+  %dd= @activity.time_deactivated
+  %dt Duration
+  %dd= distance_of_time_in_words(@activity.duration)
+

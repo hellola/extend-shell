@@ -1,0 +1,22 @@
+.page-header
+  = link_to new_activity_group_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Activity group
+  %h1 Listing activity_groups
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th
+        %th
+        %th
+
+    %tbody
+      - @activity_groups.each do |activity_group|
+        %tr
+          %td= activity_group.name
+          %td= link_to 'Show', activity_group
+          %td= link_to 'Edit', edit_activity_group_path(activity_group)
+          %td= link_to 'Destroy', activity_group, data: { confirm: 'Are you sure?' }, method: :delete
