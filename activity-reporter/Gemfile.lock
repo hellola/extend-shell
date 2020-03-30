@@ -70,7 +70,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.6)
     unicode-display_width (1.6.1)
-    yard (0.9.16)
+    yard (0.9.24)
 
 PLATFORMS
   ruby
