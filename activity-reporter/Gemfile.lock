@@ -28,7 +28,7 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rack (2.1.1)
+    rack (3.0.4.1)
     rainbow (3.0.0)
     rb-readline (0.5.5)
     redis (4.1.0)
